@@ -75,7 +75,43 @@ class LRUCache {
 
 ```
 
-流程图
+初始化dummy和第一次put的流程图 | 实线箭头表示next指针,虚线箭头表示prev指针
+```mermaid
+flowchart LR
+    subgraph 步骤1
+        dummy1[dummy] --> dummy1
+        dummy1 -.-> dummy1
+        node1[1,1]
+    end
+    
+    subgraph 步骤2
+        dummy2[dummy] --> node2[1,1]
+        node2 --> dummy2
+        dummy2 -.-> node2
+        node2 -.-> dummy2
+    end
+
+    subgraph 步骤3
+        dummy3[dummy] --> node3_1[2,2]
+        node3_1 --> node3_2[1,1]
+        node3_2 --> dummy3
+        dummy3 -.-> node3_2
+        node3_2 -.-> node3_1
+        node3_1 -.-> dummy3
+    end
+
+    步骤1 --> 步骤2 --> 步骤3
+    
+    style dummy1 fill:#f9f,stroke:#333,stroke-width:4px
+    style dummy2 fill:#f9f,stroke:#333,stroke-width:4px
+    style dummy3 fill:#f9f,stroke:#333,stroke-width:4px
+    style node1 fill:#85C1E9,stroke:#333,stroke-width:2px
+    style node2 fill:#85C1E9,stroke:#333,stroke-width:2px
+    style node3_1 fill:#85C1E9,stroke:#333,stroke-width:2px
+    style node3_2 fill:#85C1E9,stroke:#333,stroke-width:2px
+```
+
+整体流程图
 ```mermaid
 
 flowchart TD
